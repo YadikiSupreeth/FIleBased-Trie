@@ -24,6 +24,63 @@ struct TrieNode
     bool isEndOfWord;
 };
 
+
+
+
+struct file_strc
+{
+    char Alphabet;
+    char fname[20];
+    int flag;
+};
+
+void read_file()
+{
+    FILE *fp;
+    fp=fopen("xyz.txt","r");
+    int i=1;
+    struct file_strc fc;
+    printf("ready to print\n");
+    for(i=0;i<26;i++)
+    {
+        fscanf(fp,"%c %s %d\n",&fc.Alphabet,&fc.fname,&fc.flag);
+        printf("%c %s %d\n",fc.Alphabet,fc.fname,fc.flag);
+    }
+
+}
+
+FILE* create_file()
+{
+    FILE *fp;
+    struct file_strc fs;
+    fp=fopen("xyz.txt","w+");
+    if(fp==NULL)
+        return NULL;
+    int i=1;
+    fs.flag=0;
+
+    fs.Alphabet='a';
+    printf("ready to write");
+    for(i=0;i<26;i++)
+    {
+        fprintf(fp,"%c %s %d\n",fs.Alphabet+i,"NULL",fs.flag);
+    }
+    return fp;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Returns new trie node (initialized to NULLs)
 struct TrieNode *getNode(void)
 {
@@ -112,6 +169,14 @@ int main()
     printf("%s --- %s\n", "thaw", output[search(root, "thaw")] );
 
 
-  getch();
+     FILE *fp;
+    fp=create_file();
+    printf("done\n");
+    fclose(fp);
+    read_file();
+getch();
 }
+
+
+
 
